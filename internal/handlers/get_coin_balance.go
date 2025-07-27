@@ -11,19 +11,17 @@ import (
 )
 
 func GetCoinBalance(w http.ResponseWriter, r *http.Request) {
-	var params = api.CoinBalanceParams{}
-	var decoder *schema.Decoder = schema.NewDecoder()
-	var err error
+	var params api.CoinBalanceParams
+	decoder := schema.NewDecoder()
 
-	err = decoder.Decode(&params, r.URL.Query())
+	err := decoder.Decode(&params, r.URL.Query())
 	if err != nil {
 		log.Errorf("Error decoding query parameters: %v", err)
 		http.Error(w, "Invalid request", http.StatusBadRequest)
 		return
 	}
 
-	var database *tools.DatabaseInterface
-	database, err = tools.NewDatabase()
+	database, err := tools.NewDatabase()
 	if err != nil {
 		log.Errorf("Error creating database connection: %v", err)
 		api.InternalErrorHandler(w)
@@ -37,8 +35,8 @@ func GetCoinBalance(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var response = api.CoinBalanceResponse{
-		Balance: (*&tokenDetails).Coins,
+	response := api.CoinBalanceResponse{
+		Balance: tokenDetails.Coins,
 		Code:    http.StatusOK,
 	}
 

@@ -29,18 +29,17 @@ var mockCoinDetails = map[string]CoinDetails{
 	},
 	"jason": {
 		Coins:    200,
-		Username: "alex",
+		Username: "jason",
 	},
 	"hari": {
 		Coins:    300,
-		Username: "alex",
+		Username: "hari",
 	},
 }
 
 func (d *mockDB) GetUserLoginDetails(username string) *LoginDetails {
 	time.Sleep(time.Second * 1)
 
-	var clientData = LoginDetails{}
 	clientData, ok := mockLoginDetails[username]
 	if !ok {
 		return nil
@@ -51,7 +50,6 @@ func (d *mockDB) GetUserLoginDetails(username string) *LoginDetails {
 func (d *mockDB) GetUserCoins(username string) *CoinDetails {
 	time.Sleep(time.Second * 1)
 
-	var clientData = CoinDetails{}
 	clientData, ok := mockCoinDetails[username]
 	if !ok {
 		log.Printf("No coin details found for user: %s", username)

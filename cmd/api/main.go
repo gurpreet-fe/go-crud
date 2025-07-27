@@ -11,7 +11,7 @@ import (
 
 func main() {
 	log.SetReportCaller(true)
-	var r *chi.Mux = chi.NewRouter()
+	r := chi.NewRouter()
 	handlers.Handler(r)
 
 	fmt.Println("Starting GO API service...")

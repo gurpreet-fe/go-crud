@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-// Coint Balance Params
+// Coin Balance Params
 type CoinBalanceParams struct {
 	Username string
 }
