@@ -25,13 +25,13 @@ func GetCoinBalance(w http.ResponseWriter, r *http.Request) {
 	var database *tools.DatabaseInterface
 	database, err = tools.NewDatabase()
 	if err != nil {
+		log.Errorf("Error creating database connection: %v", err)
 		api.InternalErrorHandler(w)
 		return
 	}
 
-	var tokenDetails *tools.CoinDetails
-	tokenDetails, err = (*database).GetUserCoins(params.Username)
-	if err != nil {
+	tokenDetails := (*database).GetUserCoins(params.Username)
+	if tokenDetails == nil {
 		log.Errorf("Error getting user coins: %v", err)
 		api.InternalErrorHandler(w)
 		return

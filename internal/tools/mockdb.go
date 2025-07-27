@@ -1,37 +1,38 @@
 package tools
 
 import (
+	"log"
 	"time"
 )
 
-type mockDB struct {}
+type mockDB struct{}
 
-var mockLoginDetails = map[string]LoginDetails {
+var mockLoginDetails = map[string]LoginDetails{
 	"alex": {
 		AuthToken: "123ABC",
-		Username: "alex",
+		Username:  "alex",
 	},
 	"jason": {
 		AuthToken: "456ABC",
-		Username: "jason",
+		Username:  "jason",
 	},
 	"hari": {
 		AuthToken: "789ABC",
-		Username: "hari",
+		Username:  "hari",
 	},
 }
 
-var mockCoinDetails = map[string]CoinDetails {
+var mockCoinDetails = map[string]CoinDetails{
 	"alex": {
-		Coins: 100,
+		Coins:    100,
 		Username: "alex",
 	},
 	"jason": {
-		Coins: 200,
+		Coins:    200,
 		Username: "alex",
 	},
 	"hari": {
-		Coins: 300,
+		Coins:    300,
 		Username: "alex",
 	},
 }
@@ -53,6 +54,7 @@ func (d *mockDB) GetUserCoins(username string) *CoinDetails {
 	var clientData = CoinDetails{}
 	clientData, ok := mockCoinDetails[username]
 	if !ok {
+		log.Printf("No coin details found for user: %s", username)
 		return nil
 	}
 	return &clientData

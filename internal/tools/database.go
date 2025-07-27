@@ -6,11 +6,11 @@ import (
 
 type LoginDetails struct {
 	AuthToken string
-	Username string
+	Username  string
 }
 
 type CoinDetails struct {
-	Coins int64
+	Coins    int64
 	Username string
 }
 
